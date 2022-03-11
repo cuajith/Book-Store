@@ -1,0 +1,69 @@
+.registration{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 30px;
+
+  margin-right: 20%;
+  /*background: #fff;
+  border-radius: 2px;
+  height: 530px;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-top: 3%;
+  position: relative;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+}
+.registration-img{
+  width: 40%;
+  
+}
+.registration-img img{
+  width: 620px;
+  height: 650px;
+  margin-top: -6px;
+  margin-left: 94px;
+}
+.registration-form{
+  width: 1200px;
+  margin-top: -10px;
+}
+.account{
+  margin-left: -50px;
+}
+.login-register-link{
+  margin-left: 35%;
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* login */
+.login{
+  display: flex;
+    justify-content: center;
+    width: 950px;
+    background: #fff;
+    border-radius: 2px;
+    height: 450px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 6%;
+    position: relative;
+    box-shadow: 0 3px 6px rgb(0 0 0 / 16%), 0 3px 6px rgb(0 0 0 / 23%);
+}
+.login-img{
+ margin-left: -12px;
+ background-color: rgb(35, 35, 65);
+}
+.login-img img{
+  width: 100%;
+  height: 100%;
+  /* margin-top: -6px; */
+  
+}
+
+.login-form{
+  margin-top: 0px;
+  margin-right: 20px;
+}

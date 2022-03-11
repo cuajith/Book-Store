@@ -1,0 +1,59 @@
+.login-register{
+    display: flex;
+    flex-direction: row;
+}
+.navbar{
+    background-color: rgb(0 5 53 / 79%)  !important ;
+    width: 100%;
+    color: #fff;
+    z-index: 999;
+}
+
+.me-auto ul{
+    float: right !important;
+    height: 20px;
+    margin-top: 10px;
+    margin-left: -25px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+#navbarSupportedContent{
+    margin-left: 997px;
+    
+}
+.nav-item{
+    width: 115px;
+}
+
+.nav-item .nav-link{
+    color: #fff !important;
+}
+.nav-item .nav-link:hover{
+    color: rgba(255, 255, 255, 0.596) !important;
+}
+.dropdown-menu{
+    margin-top: 55px;
+    margin-left: -58px;
+}
+.dropdown-menu a{
+    color: rgb(0 0 0 / 72%);
+}
+.navbar-brand{
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-left: 30px;
+    font-weight: bold;
+    color: #fff !important;
+}
+/* Logout css */
+
+
+
+@media (max-width:767px){
+    #navbarSupportedContent{
+        margin-left: 0px;
+    }
+    .login-register{
+        display: flex;
+        flex-direction: column;
+    }
+    
+}

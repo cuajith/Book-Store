@@ -1,0 +1,88 @@
+
+  .heading{
+    color: #414141;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+  
+  .login-container {
+    position: relative;
+    width: 420px !important;
+    height: 320px !important;
+    display: flex;
+    margin-top: 20px;
+  }
+  .wrapper {
+    margin: -130px auto;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+  .form-control{
+    background: rgba( 255, 255, 255, 0.1 );
+    border: solid 1px rgba( 255, 255, 255, 0.1 ); 
+    background-clip: padding-box;
+    backdrop-filter: blur( 24px );
+    width: 396px !important;
+    border-color: #cccccc !important;
+    color: rgb(36, 32, 32);
+    margin-left: 10px;
+    border-radius: 2px;
+    
+}
+
+.forget{
+    cursor: pointer;
+    color: blue;
+    margin-left: 10px;
+  }
+label{
+    color: #585858;
+    margin-left: 10px;
+    padding: 3px;
+  }
+  .submit-button{
+     width: 396px !important;
+     border:none;
+     background-color:#414141 ;
+     border-radius: 5px;
+     color: #f8f6f6;
+     font-size: 15px;
+     padding: 7px;
+     margin-left: 10px;
+     margin-bottom: 15px;
+     margin-top: 30px;
+  }
+  .account:hover{
+    color: black;
+  }
+  .account{
+    color: black;
+    padding: 5px;
+  }
+  .send-otp-button{
+    width: 130px !important;
+    border: none;
+    background-color: #414141;
+    border-radius: 5px;
+    color: #f8f6f6;
+    font-size: 15px;
+    padding: 7px;
+    margin-left: -50px;
+    margin-bottom: 15px;
+    margin-top: 14px;
+    margin-right: 16px
+  }
+  .forget-image{
+   width:100%;
+   height: 200px;
+   margin-left: 300px;
+   margin-top: 10px;
+  }
+  .forget-form{
+  padding: 20px 50px;
+  margin-left: -200px;
+  margin-top: -250px;
+  }
