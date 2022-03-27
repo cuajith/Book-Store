@@ -1,8 +1,10 @@
 const Book = require("../model/Book");
+const Arrival = require("../model/Arrivals")
 const userSchema = require("../model/userSchema");
-const User = require('../model/userSchema')
+const arrivalSchema = require("../model/Arrivals");
+const User = require('../model/userSchema');
 
-{/*const getAllBooks = async (req, res) => {
+const getAllBooks = async (req, res) => {
     const books = await Book.find();
 
     if (!books) {
@@ -10,7 +12,7 @@ const User = require('../model/userSchema')
     }
     return res.status(200).json({ books })
 }
-*/}
+
 const getById = async (req, res) => {
     const id = req.params.id;
     let book;
@@ -40,6 +42,23 @@ const addBook = async (req, res, next) => {
         return res.status(500).json * { message: "unable to add" }
     }
     return res.status(201).json({ book })
+}
+
+const addArrival = async (req, res, next) => {
+    const { image, name, author, price, available, ratings } = req.body;
+    const arrival = new Arrival({
+        image,
+        name,
+        author,
+        price,
+        available,
+        ratings
+    });
+    await arrival.save();
+    if (!arrival) {
+        return res.status(500).json * { message: "unable to add" }
+    }
+    return res.status(201).json({ arrival })
 }
 
 const updateBook = async (req, res) => {
@@ -95,35 +114,25 @@ const addtoCart = async (req, res) => {
             { email: req.body.email }, { cart: books }
         )
     })
-    
-return res.status(200).json(user);
+
+    return res.status(200).json(user);
 }
 
-const showCart = async(req,res) => {
-    const id = req.params.id;
-    const books = await User.findById(id);
-   
-    //const addedBook = await User.findOne({ cart: id.cart });
-    //if(addedBook) {
-     //   return res.status(404).json("Already Book is added")
-    //}
-    if(!books) {
-        return res.status(400).json("Error")
-    }
-    
+const showCart = async (req, res) => {
+
     const myCart = await User.findOne({ email: req.body.email }, { cart: 1 });
-    if(myCart === null) {
+    if (myCart === null) {
         return res.status(400).json("myCart is null")
     }
-   
+
     return res.status(200).json(myCart);
 }
 
-const deleteCart = async(req,res) => {
+const deleteCart = async (req, res) => {
     const id = req.params.id;
     const books = await Book.findById(id);
     const userData = await User.findOne({ email: req.body.email });
-    
+
     if (!userData) {
         return res.status(400).json("Email not exist");
     }
@@ -138,7 +147,66 @@ const deleteCart = async(req,res) => {
     return res.status(200).json(user);
 }
 
-//exports.getAllBooks = getAllBooks;
+const OrderedBooks = async (req, res) => {
+    const id = req.params.id;
+    const books = await Book.findById(id);
+    const userData = await User.findOne({ email: req.body.email });
+    console.log(userData)
+    if (!userData) {
+        return res.status(400).json("Email not exist");
+    }
+    if (!books) {
+        return res.status(404).json({ message: "Books not found" })
+    }
+    const user = await User.updateOne({ email: req.body.email }, {
+        $push: (
+            { email: req.body.email }, { orders: books }
+        ),
+   
+        $pull: (
+            { email: req.body.email }, { cart: books }
+        )
+    })
+    return res.status(200).json(user);
+}
+
+const showOrders = async (req, res) => {
+
+    const myOrders = await User.findOne({ email: req.body.email }, { orders: 1 });
+    if (myOrders === null) {
+        return res.status(400).json("Order is null")
+    }
+
+    return res.status(200).json(myOrders);
+}
+
+const deleteOrders = async (req, res) => {
+    const id = req.params.id;
+    const books = await Book.findById(id);
+    const userData = await User.findOne({ email: req.body.email });
+
+    if (!userData) {
+        return res.status(400).json("Email not exist");
+    }
+    if (!books) {
+        return res.status(404).json({ message: "Books not found" })
+    }
+    const user = await User.updateOne({ email: req.body.email }, {
+        $pull: (
+            { email: req.body.email }, { orders: books }
+        )
+    })
+    return res.status(200).json(user);
+}
+
+const searchBar = async(req, res) => {
+    const regex = new RegExp(req.params.name, 'i');
+    Book.find({ name: regex }).then((result) => {
+        res.status(200).json(result);
+    })
+}
+
+exports.getAllBooks = getAllBooks;
 exports.addBook = addBook;
 exports.getById = getById;
 exports.updateBook = updateBook;
@@ -146,3 +214,8 @@ exports.deleteBook = deleteBook;
 exports.addtoCart = addtoCart;
 exports.showCart = showCart;
 exports.deleteCart = deleteCart;
+exports.OrderedBooks = OrderedBooks;
+exports.showOrders = showOrders;
+exports.deleteOrders = deleteOrders;
+exports.searchBar = searchBar;
+exports.addArrival = addArrival;

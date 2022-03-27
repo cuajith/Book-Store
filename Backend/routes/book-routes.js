@@ -6,18 +6,21 @@ const Otp = require('../model/otp')
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
-
-//router.get('/', booksController.getAllBooks);
+router.get('/', booksController.getAllBooks);
 router.post('/addbook',booksController.addBook);
+router.post('/addarrival',booksController.addArrival);
 router.get('/:id', booksController.getById);
 router.put('/:id',booksController.updateBook);
 router.delete('/:id',booksController.deleteBook);
 router.post('/addToCart/:id',booksController.addtoCart);
-router.get('/showCart/:id',booksController.showCart);
+router.post('/showCart',booksController.showCart);
 router.delete('/deleteCart/:id',booksController.deleteCart);
+router.post('/OrderedBooks/:id',booksController.OrderedBooks);
+router.post('/myOrders',booksController.showOrders);
+router.delete('/deleteOrders/:id',booksController.deleteOrders);
+router.get('/search/:name',booksController.searchBar);
 
 router.post('/register', async (req, res) => {
-
     try {
         const emailExist = await User.findOne({ email: req.body.email })
         if (emailExist) {

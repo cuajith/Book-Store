@@ -9,9 +9,20 @@ import InfoIcon from '@mui/icons-material/Info';
 import axios from 'axios'
 import "./Cart.css"
 import { toast, ToastContainer } from 'react-toastify';
-import { Link } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
 
-export default function Cart() {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 480,
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
+export default function OrderedBooks() {
 
   const [data, setData] = useState('');
 
@@ -21,39 +32,39 @@ export default function Cart() {
   const token = role.token;
   const [show, setShow] = useState(0);
 
-  const getCartData = () => {
+  const getOrderData = () => {
     axios(
       {
-        url: 'http://localhost:5000/books/showCart',
+        url: 'http://localhost:5000/books/myOrders',
         method: 'POST',
         data: { email },
         headers: { 'x-auth-token': token }
-      }).then(response => setData(response.data.cart));
+      }).then(response => setData(response.data.orders));
 
     setTimeout(() => {
       setShow(1)
     }, 3000);
   };
 
-  useEffect(getCartData, [email, token]);
+  useEffect(getOrderData, [email, token]);
 
-  return (<div><div className='heading'><Typography variant="h4" className='myCart-text'>My Cart</Typography></div>
+  return (<div><div className='heading'><Typography variant="h4" className='myCart-text'>My Orders</Typography></div>
     <div className='mycart'>
       {((!data) || !(data.length)) ? (show) ?
         <div className='emptycart'>
-          <img src="./images/banner/empty cart.jpg" alt="Empty Cart" />
-          <span className='cart-para'>
-            <Typography sx={{ mt: 25, mx: 10 }} variant="h4">Your cart is empty</Typography>
-            <Typography sx={{ mt: 2, mx: 19 }}>Add items to it now</Typography>
-            <Button sx={{ mt: 3, ml: 16 }} component={Link} to='/books' variant="contained" classname="cartempty">Continue Shopping</Button>
-          </span>
+          <img src="./images/banner/no order.jpg" alt="Empty Cart" />
+          <Typography sx={{ my: 30, mx: 10 }} variant="h5" className="no-order">No Orders !</Typography>
         </div> : ''
-        : data.map((data, i) => { return <div className='cartbook' key={i}> <CartBooks data={data} getCartData={getCartData} visibility={false} /></div>; })}
+        : data.map((data, i) => { return <div className='cartbook' key={i}> <CartBooks data={data} getOrderData={getOrderData} visibility={false} /></div>; })}
     </div>
   </div>);
 }
 
-function CartBooks({ data, getCartData }) {
+function CartBooks({ data, getOrderData }) {
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   let history = useNavigate();
   const role = JSON.parse(localStorage.getItem("auth")) || {}
@@ -61,36 +72,24 @@ function CartBooks({ data, getCartData }) {
   const token = role.token;
   const { name, author, image, price, ratings, _id } = data;
 
-  const handleClick = () => {
-    const role = JSON.parse(localStorage.getItem("auth")) || {}
-    const email = role.email;
-    console.log(email);
-    axios({
-      url: `http://localhost:5000/books/OrderedBooks/${_id}`,
-      method: 'POST',
-      data: { email }
-    })
-      .then(res => {
-        console.log(res);
-      });
-  }
-
-
-  const DeleteCartBook = (_id, email) => {
+  const DeleteOrderBook = (_id, email) => {
     console.log(_id)
     axios(
       {
-        url: `http://localhost:5000/books/deleteCart/${_id}`,
+        url: `http://localhost:5000/books/deleteOrders/${_id}`,
         method: 'DELETE',
         data: { _id, email },
         headers: { 'x-auth-token': token }
-      }).then(response => response.data).then(toast.success("Product Deleted!"))
+      }).then(response => response.data).then(toast.success("Order Cancelled!"))
       .catch(error => toast.error("Try Again"))
-      .then(() => setTimeout(() => getCartData(), 1000));
+      .then(() => setTimeout(() => getOrderData(), 1000));
+      handleClose()
   };
   return (
     <div>
+
       <div className='cartcontainer'>
+
         <div className='thumbnailContainer'>
           <img src={image} className='bookThumbnail' alt='bookThumbnail' />
         </div>
@@ -105,11 +104,25 @@ function CartBooks({ data, getCartData }) {
           <Rating name="half-rating-read" className='detail' defaultValue={ratings} precision={0.5} readOnly />
           <Typography color="text.primary" variant="h6"><p className='detail'>Price : Rs.{price}</p></Typography>
 
-          <Button onClick={() => DeleteCartBook(_id, email)} color='error' variant='outlined' style={{ marginRight: '0.75rem' }}>Remove Item</Button>
-          <Button onClick={handleClick} color='warning' variant='contained'>Place Order</Button>
+          <Button onClick={handleOpen} color='error' variant='outlined'>Cancel Order</Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <Typography id="modal-modal-title" variant="h6" component="h2">
+                Are you sure you want to cancel this order ?
+              </Typography>
+              <Button onClick={() => DeleteOrderBook(_id, email)} sx={{ mt: 4, ml: 9, width: 120 }} color='error' variant='contained'>Yes</Button>
+              <Button onClick={handleClose} sx={{ mt: 4, ml: 4, width: 120 }} color='error' variant='outlined'>No</Button>
+            </Box>
+          </Modal>
         </CardContent>
       </div>
-    <ToastContainer />
+
+      <ToastContainer />
     </div>
   )
 }

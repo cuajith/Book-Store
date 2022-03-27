@@ -1,0 +1,40 @@
+.CartBook{
+    width: 100%;
+    height: 100% !important;
+}
+.cartcontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3%;
+    margin: 10px 50px;
+    border: 1px solid rgba(0, 0, 0, 0.288);
+}
+.thumbnailContainer{
+    width: 180px;
+    height: 200px;
+}
+.bookThumbnail{
+    width: 180px;
+    height: 100%;
+}
+.myCart-text{
+    text-align: center !important;
+    margin-left: 600px !important;
+    width: 100%;
+    margin-top: 30px !important;
+    color: #000080;
+}
+.emptycart{
+    display: flex;
+    flex-direction: row;
+    margin-left: 20%;
+}
+.cartempty:hover{
+   color: #ffffff;
+}
+.no-order{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
+    color: red !important;
+    font-size: 24px;
+}

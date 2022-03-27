@@ -7,31 +7,31 @@
     width: 100%;
     color: #fff;
     z-index: 999;
+    height: 67px;
 }
 
 .me-auto ul{
     float: right !important;
     height: 20px;
-    margin-top: 10px;
-    margin-left: -25px;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 #navbarSupportedContent{
-    margin-left: 997px;
-    
+    margin-left: 956px;
+    margin-bottom: 20px;
 }
 .nav-item{
-    width: 115px;
+    width: 129px;
 }
 
 .nav-item .nav-link{
     color: #fff !important;
+    margin-top: 15px;
 }
 .nav-item .nav-link:hover{
     color: rgba(255, 255, 255, 0.596) !important;
 }
 .dropdown-menu{
-    margin-top: 55px;
+    margin-top: 110px;
     margin-left: -58px;
 }
 .dropdown-menu a{
@@ -43,10 +43,69 @@
     font-weight: bold;
     color: #fff !important;
 }
-/* Logout css */
-
-
-
+.search-container {
+    width: 490px;
+    display: block;
+    margin-top: 30px;
+}
+input#search-bar {
+    margin-left: 196px;
+    width: 100%;
+    height: 30px;
+    padding: 0 20px;
+    font-size: 1rem;
+    border: 1px solid #d0cfce;
+    border-radius: 5px;
+    outline: none;
+}
+input#search-bar:focus {
+    border: 1px solid #008abf;
+    transition: 0.35s ease;
+    color: #008abf;
+}
+input#search-bar:focus::-webkit-input-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+input#search-bar:focus::-moz-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+input#search-bar:focus:-ms-placeholder {
+    transition: opacity 0.45s ease;
+    opacity: 0;
+}
+#navbarDropdownMenuLink{
+    margin-top: 53px;
+}
+/* Add Book */
+.form-group{
+    margin-top: 20px;
+}
+.addbook-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 70px !important;
+}
+.form-control{
+    display: flex;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 30% !important;
+}
+.btn-primary{
+    width: 25%;
+    margin-left: 0.5%;
+}
+.shopping-cart{
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    padding: 5px;
+}
 @media (max-width:767px){
     #navbarSupportedContent{
         margin-left: 0px;
@@ -55,5 +114,4 @@
         display: flex;
         flex-direction: column;
     }
-    
 }

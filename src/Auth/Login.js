@@ -115,7 +115,7 @@ const Login = (props) => {
               margin="normal"
               id="outlined-basic"
               
-              label="FullName"
+              label="Email"
               variant='standard'
               name='email'
               onChange={formik.handleChange}
