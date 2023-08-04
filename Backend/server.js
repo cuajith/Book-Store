@@ -10,7 +10,7 @@ app.use(cors())
 app.use('/books',router)
 
 //Database Connection
-mongoose.connect("mongodb+srv://ajith080:mongoatlas@cluster0.62w7s.mongodb.net/bookStore?retryWrites=true&w=majority").
+mongoose.connect("mongodb+srv://username:password@cluster0.62w7s.mongodb.net/bookStore?retryWrites=true&w=majority").
 then(()=> console.log("Database Connected"))
 
 app.listen(5000, ()=>{
